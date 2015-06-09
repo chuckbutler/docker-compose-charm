@@ -1,0 +1,14 @@
+options:
+  repository:
+    type: string
+    default: https://github.com/chuckbutler/docker-demos
+    description: "repository to clone that holds the docker-compose.yaml or fig.yaml"
+  path:
+    type: string
+    default:
+    description: "path in repository to docker-compose or fig.yaml, defaults to the ROOT of the path"
+  arguments:
+    type: string
+    default:
+    description: "Optional arguments to pass to docker-compose. Defaults to `start`"
+

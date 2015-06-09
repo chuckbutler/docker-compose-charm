@@ -1,0 +1,15 @@
+name: docker-compose
+summary: deploy container formations on the docker-charm
+maintainer: Charles Butler <charles.butler@canonical.com>
+description: |
+    Compose is a tool for defining and running complex applications with Docker.
+    With Compose, you define a multi-container application in a single file,
+    then spin your application up in a single command which does everything
+    that needs to be done to get it running.
+tags:
+  - misc
+subordinate: true
+requires:
+  docker-host:
+    interface: juju-info
+    scope: container

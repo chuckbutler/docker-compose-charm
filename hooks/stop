@@ -1,0 +1,21 @@
+#!/bin/bash
+# config-changed occurs everytime a new configuration value is updated (juju set)
+
+COMPOSE_REPO=$(config-get repository)
+COMPOSE_PATH=$(config-get path)
+COMPOSE_ARGS=$(config-get arguments)
+
+
+# set current operating context to the repository
+cd $CHARM_DIR/compose_app
+
+# if provided a path, cd into the path
+if [ ! -z $COMPOSE_PATH ]; then
+    cd $COMPOSE_PATH
+fi
+
+docker compose stop
+docker compose rm
+cd $CHARM_DIR
+rm -rf compose_app
+

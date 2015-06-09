@@ -1,0 +1,40 @@
+#!/bin/bash
+# config-changed occurs everytime a new configuration value is updated (juju set)
+
+set -ex
+
+COMPOSE_REPO=$(config-get repository)
+COMPOSE_PATH=$(config-get path)
+COMPOSE_ARGS=$(config-get arguments)
+
+
+if [ -z $COMPOSE_REPO ]; then
+    juju-log "Missing repository. Doing nothing"
+    status-set blocked "Missing repository config"
+    exit 0
+fi
+
+
+if [ ! -d "$CHARM_DIR/compose_app" ]; then
+    git clone $COMPOSE_REPO $CHARM_DIR/compose_app
+else
+    cd $CHARM_DIR/compose_app && git pull origin master
+fi
+
+# set current operating context to the repository
+cd $CHARM_DIR/compose_app
+
+# if provided a path, cd into the path
+if [ ! -z $COMPOSE_PATH ]; then
+    cd $COMPOSE_PATH
+fi
+
+docker-compose pull
+docker-compose build
+
+if [ -z $COMPOSE_ARGS ]; then
+    docker-compose up -d
+else
+    docker-compose $COMPOSE_ARGS
+fi
+
