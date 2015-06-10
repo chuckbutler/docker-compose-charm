@@ -23,7 +23,7 @@ Using the example of deploying the 2048 HTML5 game running in a docker container
 
 ## Known Limitations and Issues
 
-This not only helps users but gives people a place to start if they want to help you add features to your charm.
+[todo]
 
 # Configuration
 
