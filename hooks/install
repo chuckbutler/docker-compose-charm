@@ -8,7 +8,7 @@
 COMPOSE_INSTALLED=$(which docker-compose)
 
 if [ -z $COMPOSE_INSTALLED ]; then
-    pip install --upgrade docker-compose
+    pip install --upgrade docker-compose==1.2.0
 fi
 
 apt-get install -y git
